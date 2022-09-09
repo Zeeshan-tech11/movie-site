@@ -10,12 +10,66 @@ body{
     background: var(--netflix);
     color: white;
 }
+.flex{
+    display: flex;
+
+}
+.nav{
+    justify-content: center;
+    align-items: center;
+}
+.logo{
+    width: 5rem;
+    margin-right: .8rem;
+}
+.logo img{
+    width: 100%;
+
+
+}
+.search{
+    /* background-color: aqua; */
+    color: black;
+    font-size: 1rem;
+    width: 50%;
+    position: relative;
+
+    align-items: center;
+    height: 40px;
+    border-radius: 4px;
+    background-color:white;
+}
+.search input{
+    border: none;
+    text-decoration: none;
+    height: 100%;
+    border-radius: 4px;
+    justify-content: space-around;
+    width: 100%;
+    background-color:white;
+    margin-left: .5rem;
+    border-left: 1px solid black;
+}
+.search i{
+    position: absolute;
+    right: 1%;
+}
+.nav span{
+    margin-left: .8rem;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .long-box{
+    width: 80%;
+    margin: 0 auto;
 }
 .box{
     display: flex;
     max-width: 50%;
     min-width: 400px;
+    margin: 0 auto;
     /* background-color: aqua; */
     background: linear-gradient(to right, #6f0000, #200122); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     

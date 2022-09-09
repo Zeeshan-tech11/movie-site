@@ -1,4 +1,4 @@
-let search=document.querySelector('input')
+let search=document.querySelector('.search input')
 let long=document.querySelector('.long-box')
 let url='http://www.omdbapi.com/?i=tt3896198&apikey=e8a8b26b'
 
