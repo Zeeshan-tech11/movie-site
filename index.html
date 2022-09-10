@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="nav flex">
-        <div class="logo">
-            <img src="https://www.logo.wine/a/logo/IMDb/IMDb-Logo.wine.svg" alt="logo">
-        </div>
-       <div class="search flex">
-           <div class="dropdown">ALL</div>
-           <input type="text" placeholder="search Movie">
-           <i class="fa-solid fa-magnifying-glass"></i>
-       </div>
-       <span>Favourites</span>
-       <span>SignIn</span>
+      <div class="logo">
+        <img
+          src="https://www.logo.wine/a/logo/IMDb/IMDb-Logo.wine.svg"
+          alt="logo"
+        />
+      </div>
+      <div class="search flex">
+        <div class="dropdown">ALL</div>
+        <input type="text" placeholder="search Movie" />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <span>Favourites</span>
+      <span>SignIn</span>
     </div>
-    <div class="long-box">
-
-    </div>
+    <div class="long-box"></div>
     <!-- <form action="">
         <input type="text" placeholder="search">
         <div class="search-display">
@@ -44,14 +56,26 @@
     </form> -->
     <!-- .........main start..... -->
     <main class="flex main">
-        <div class="main-left">
-            <!-- <h1>hey</h1> -->
+      <div class="main-left">
+        <div class="fvt-list">
+            <div class="gtitle">Favourites</div>
+          <!-- <div class="box">
+            <div class="box-left">
+              <img src="./imgrt.png" alt="poster" />
+            </div>
+            <div class="box-right">
+              <div class="title">Captain America: The First Avenger</div>
+              <div class="year">2011</div>
+            </div>
+            <button class="add-fvt">REMOVE FAVOURITE</button>
+          </div> -->
         </div>
-        <div class="main-right">
-            <div class="gener">
-                <div class="gtitle">Comedy</div>
-                <div class="glist flex">
-                    <!-- <div class="card" style="width: 18rem;">
+      </div>
+      <div class="main-right">
+        <div class="gener">
+          <div class="gtitle">Comedy</div>
+          <div class="glist comedy flex">
+            <!-- <div class="card" style="width: 18rem;">
                         <img src="./imgrt.png" class="card-img-top" alt="poster">
                         <div class="card-body">
                           <h5 class="card-title">hey-man</h5>
@@ -59,12 +83,27 @@
                           <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                       </div> -->
-                </div>
-            </div>
+          </div>
+          <div class="gtitle">Thriller</div>
+          <div class="glist thriller flex">
+            <!-- <div class="card" style="width: 18rem;">
+                        <img src="./imgrt.png" class="card-img-top" alt="poster">
+                        <div class="card-body">
+                          <h5 class="card-title">hey-man</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                      </div> -->
+          </div>
         </div>
+      </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
 
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
