@@ -39,16 +39,16 @@ let fvtdata = [
 ];
 window.localStorage.setItem("fvtdata",JSON.stringify(fvtdata))
 
-const removedata = (movie) => {
+const removedata = (event) => {
   let fvtdata=JSON.parse(localStorage.getItem('fvtdata'))
-  let idx=movie.target.value
-  console.log(fvtdata);
+  let idx=event.target.value
+  // console.log(fvtdata);
   let res=[];
   for(let i=0;i<fvtdata.length;i++){
     if(fvtdata[i].imdbID!=idx)
     res.push(fvtdata[i])
   }
-  console.log(res);
+  // console.log(res);
   window.localStorage.setItem("fvtdata",JSON.stringify(res))
   displayfvt()
   //   displayfvt(fvtdata)
@@ -63,7 +63,31 @@ const removedata = (movie) => {
   //   displayfvt(fvtdata)
   // }
 };
+const addData=(event)=>{
+  fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&i=${event.target.value}`)
+  .then((res) => res.json())
+  .then((data) => {
+    let response = data.Response;
+    if(response){
+      let fvtdata=JSON.parse(localStorage.getItem('fvtdata'))
+      let res=[];
+     for(let i=0;i<fvtdata.length;i++){
+       res.push(fvtdata[i])
+     }
+    //  console.log(data);
+     res.unshift(data)
+     window.localStorage.setItem("fvtdata",JSON.stringify(res))
 
+     displayfvt()
+    }
+  })
+  .catch((e)=>console.log('errror agya'));
+
+  
+  // res.unshift(idx)
+  // console.log(res);
+  // displayfvt()
+}
 window.onload = function () {
 
   //to fetch comedy
@@ -99,7 +123,7 @@ const displayfvt = () => {
   let fvt=JSON.parse(localStorage.getItem('fvtdata'))
   let gtit = document.querySelector(".gtitle");
   gtit.innerHTML=""
-  console.log(fvt);
+  // console.log(fvt);
   for(let i=0;i<fvt.length;i++) {
     let movie=fvt[i]
     let div = document.createElement("div");
@@ -118,7 +142,7 @@ const displayfvt = () => {
     gtit.appendChild(div);
   };
   let unfvt=document.querySelectorAll('.unfvt')
-  console.log(unfvt);
+  // console.log(unfvt);
   unfvt.forEach((ele)=>{
     ele.addEventListener('click',removedata)
   })
@@ -164,12 +188,17 @@ const displayCardComedy = (obj) => {
      <img src=${obj.Poster} class="card-img-top" alt="poster">
      <div class="card-body">
        <h5 class="card-title">${obj.Title}</h5>
-       <a href="#" class=" btn fvt btn-primary">Add to Fvt</a>
+       <button href="#" class=" btn fvt btn-primary" value=${obj.imdbID}>Add to Fvt</button>
      </div>
    </div>
      `;
 
   gl.appendChild(divinner);
+  let fvt=document.querySelectorAll('.fvt')
+  // console.log(fvt);
+  fvt.forEach((ele)=>{
+    ele.addEventListener('click',addData)
+  })
 };
 const displayCardThriller = (obj) => {
   const gl = document.querySelector(".thriller");
@@ -178,11 +207,15 @@ const displayCardThriller = (obj) => {
          <img src=${obj.Poster} class="card-img-top" alt="poster">
          <div class="card-body">
            <h5 class="card-title">${obj.Title}</h5>
-           <a href="#" class=" btn fvt btn-primary">Add to Fvt</a>
+           <button href="#" class=" btn fvt btn-primary"value=${obj.imdbID}>Add to Fvt</button>
          </div>
        </div>
          `;
-
+         let fvt=document.querySelectorAll('.fvt')
+         // console.log(fvt);
+         fvt.forEach((ele)=>{
+           ele.addEventListener('click',addData)
+         })
   gl.appendChild(divinner);
 };
 search.addEventListener("keyup", (e) => {
@@ -203,7 +236,7 @@ search.addEventListener("keyup", (e) => {
 
 const display = (movies) => {
   let list = "";
-  console.log(movies);
+  // console.log(movies);
   for (let i = 0; i < movies.length; i++) {
     let movie = movies[i];
     let one = `<div class="box">
@@ -214,13 +247,18 @@ const display = (movies) => {
             <div class="title">${movie.Title}</div>
             <div class="year">${movie.Year}</div>
         </div>
-        <button class="add-fvt fvt">ADD TO FAVOURITE</button>
+        <button class="add-fvt fvt" value=${movie.imdbID}>ADD TO FAVOURITE</button>
     </div>
 
         `;
     list += one;
   }
   long.innerHTML = list;
+  let fvt=document.querySelectorAll('.fvt')
+  // console.log(fvt);
+  fvt.forEach((ele)=>{
+    ele.addEventListener('click',addData)
+  })
 };
 
 const displayMoviePage = (movie) => {
