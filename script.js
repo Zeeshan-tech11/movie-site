@@ -37,44 +37,43 @@ let fvtdata = [
     imdbID: "tt0103776",
   },
 ];
+// setting local storage
+
 window.localStorage.setItem("fvtdata",JSON.stringify(fvtdata))
 
+ //removing from favourite list
 const removedata = (event) => {
   let fvtdata=JSON.parse(localStorage.getItem('fvtdata'))
   let idx=event.target.value
-  // console.log(fvtdata);
   let res=[];
   for(let i=0;i<fvtdata.length;i++){
     if(fvtdata[i].imdbID!=idx)
     res.push(fvtdata[i])
   }
-  // console.log(res);
   window.localStorage.setItem("fvtdata",JSON.stringify(res))
   displayfvt()
-  //   displayfvt(fvtdata)
-  // console.log('.....deleting');
 
-  // let idx=fvtdata.indexOf(movie)
-  // console.log('.....deleting');
-
-  // if(idx!=-1){
-  //   console.log('.....deleting');
-  //   fvtdata.splice(idx,1)
-  //   displayfvt(fvtdata)
-  // }
 };
+
+// adding to favoutite list
 const addData=(event)=>{
+  let id=event.target.value
+  let copy=false;
+  let fvtdata=JSON.parse(localStorage.getItem('fvtdata'))
+    let res=[];
+     for(let i=0;i<fvtdata.length;i++){
+       res.push(fvtdata[i])
+       if(id==fvtdata[i].imdbID){
+        copy=true
+        return;
+       }
+     }
+  if(!copy){
   fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&i=${event.target.value}`)
   .then((res) => res.json())
   .then((data) => {
     let response = data.Response;
     if(response){
-      let fvtdata=JSON.parse(localStorage.getItem('fvtdata'))
-      let res=[];
-     for(let i=0;i<fvtdata.length;i++){
-       res.push(fvtdata[i])
-     }
-    //  console.log(data);
      res.unshift(data)
      window.localStorage.setItem("fvtdata",JSON.stringify(res))
 
@@ -83,11 +82,10 @@ const addData=(event)=>{
   })
   .catch((e)=>console.log('errror agya'));
 
-  
-  // res.unshift(idx)
-  // console.log(res);
-  // displayfvt()
 }
+}
+
+// rendering page on loading
 window.onload = function () {
 
   //to fetch comedy
@@ -96,8 +94,6 @@ window.onload = function () {
     .then((data) => {
       let response = data.Response;
       if (response) {
-        // console.log(data);
-        // console.log(data.Search);
         displayside(data.Search, "c");
       }
     })
@@ -109,21 +105,22 @@ window.onload = function () {
     .then((data) => {
       let response = data.Response;
       if (response) {
-        // console.log(data);
-        // console.log(data.Search);
         displayside(data.Search, "t");
       }
     })
     .catch((err) => console.log("error agya "));
 
-  // to populate data
+  // to show initial favourite list data
   displayfvt();
 };
+
+// displaying fvt page
 const displayfvt = () => {
   let fvt=JSON.parse(localStorage.getItem('fvtdata'))
-  let gtit = document.querySelector(".gtitle");
+  
+  let gtit = document.querySelector(".gtitle2");
+  
   gtit.innerHTML=""
-  // console.log(fvt);
   for(let i=0;i<fvt.length;i++) {
     let movie=fvt[i]
     let div = document.createElement("div");
@@ -142,27 +139,15 @@ const displayfvt = () => {
     gtit.appendChild(div);
   };
   let unfvt=document.querySelectorAll('.unfvt')
-  // console.log(unfvt);
   unfvt.forEach((ele)=>{
     ele.addEventListener('click',removedata)
   })
 };
-const displayside = (data, type) => {
-  // data.forEach(ele => {
-  //     fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&i=${ele.imdbID}`)
-  // .then((res)=>res.json())
-  // .then((data)=>{
-  //     let response=data.Response
-  //     if(response){
-  //         console.log(data);
-  //         displayCard(data)
-  //         // console.log(data.Search);
-  //         // displayside(data.Search)
-  //     }
-  // })
-  // .catch((err)=>console.log('error agya '))
 
-  // });
+
+// display gener page
+const displayside = (data, type) => {
+  
   for (let i = 0; i < 4 && i < data.length; i++) {
     fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&i=${data[i].imdbID}`)
       .then((res) => res.json())
@@ -181,6 +166,8 @@ const displayside = (data, type) => {
       .catch((err) => console.log("error agya "));
   }
 };
+
+
 const displayCardComedy = (obj) => {
   const gl = document.querySelector(".comedy");
   let divinner = document.createElement("div");
@@ -188,14 +175,13 @@ const displayCardComedy = (obj) => {
      <img src=${obj.Poster} class="card-img-top" alt="poster">
      <div class="card-body">
        <h5 class="card-title">${obj.Title}</h5>
-       <button href="#" class=" btn fvt btn-primary" value=${obj.imdbID}>Add to Fvt</button>
+       <button href="#" class=" btn add-fvt fvt btn-primary" value=${obj.imdbID}>Add to Favourite</button>
      </div>
    </div>
      `;
 
   gl.appendChild(divinner);
   let fvt=document.querySelectorAll('.fvt')
-  // console.log(fvt);
   fvt.forEach((ele)=>{
     ele.addEventListener('click',addData)
   })
@@ -207,7 +193,7 @@ const displayCardThriller = (obj) => {
          <img src=${obj.Poster} class="card-img-top" alt="poster">
          <div class="card-body">
            <h5 class="card-title">${obj.Title}</h5>
-           <button href="#" class=" btn fvt btn-primary"value=${obj.imdbID}>Add to Fvt</button>
+           <button href="#" class=" btn add-fvt fvt btn-primary"value=${obj.imdbID}>Add to Favourite</button>
          </div>
        </div>
          `;
@@ -236,7 +222,6 @@ search.addEventListener("keyup", (e) => {
 
 const display = (movies) => {
   let list = "";
-  // console.log(movies);
   for (let i = 0; i < movies.length; i++) {
     let movie = movies[i];
     let one = `<div class="box">
@@ -255,7 +240,7 @@ const display = (movies) => {
   }
   long.innerHTML = list;
   let fvt=document.querySelectorAll('.fvt')
-  // console.log(fvt);
+
   fvt.forEach((ele)=>{
     ele.addEventListener('click',addData)
   })
