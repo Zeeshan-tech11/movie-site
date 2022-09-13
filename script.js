@@ -225,6 +225,9 @@ const displayCardThriller = (obj) => {
         })
   gl.appendChild(divinner);
 };
+
+// ...to search for movie..........
+
 search.addEventListener("keyup", (e) => {
   long.classList.remove('hide')
   let t = e.target.value;
@@ -242,7 +245,7 @@ search.addEventListener("keyup", (e) => {
     })
     .catch((err) => console.log("error agya "));
 });
-
+// display search result
 const display = (movies) => {
   
   for (let i = 0; i < movies.length; i++) {
@@ -305,38 +308,7 @@ console.log(e,);
 
 }
 const displayMoviePage = (movie) => {
-  const moviedata = {
-    Title: "Batman",
-    Year: "1989",
-    Rated: "PG-13",
-    Released: "23 Jun 1989",
-    Runtime: "126 min",
-    Genre: "Action, Adventure",
-    Director: "Tim Burton",
-    Writer: "Bob Kane, Sam Hamm, Warren Skaaren",
-    Actors: "Michael Keaton, Jack Nicholson, Kim Basinger",
-    Plot: "Gotham City. Crime boss Carl Grissom (Jack Palance) effectively runs the town but there's a new crime fighter in town - Batman (Michael Keaton). Grissom's right-hand man is Jack Napier (Jack Nicholson), a brutal man who is not entirely sane... After falling out between the two Grissom has Napier set up with the Police and Napier falls to his apparent death in a vat of chemicals. However, he soon reappears as The Joker and starts a reign of terror in Gotham City. Meanwhile, reporter Vicki Vale (Kim Basinger) is in the city to do an article on Batman. She soon starts a relationship with Batman's everyday persona, billionaire Bruce Wayne.",
-    Language: "English, French, Spanish",
-    Country: "United States, United Kingdom",
-    Awards: "Won 1 Oscar. 9 wins & 26 nominations total",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BZDNjOGNhN2UtNmNhMC00YjU4LWEzMmUtNzRkM2RjN2RiMjc5XkEyXkFqcGdeQXVyMTU0OTM5ODc1._V1_SX300.jpg",
-    Ratings: [
-      { Source: "Internet Movie Database", Value: "7.5/10" },
-      { Source: "Rotten Tomatoes", Value: "73%" },
-      { Source: "Metacritic", Value: "69/100" },
-    ],
-    Metascore: "69",
-    imdbRating: "7.5",
-    imdbVotes: "374,877",
-    imdbID: "tt0096895",
-    Type: "movie",
-    DVD: "22 Aug 1997",
-    BoxOffice: "$251,409,241",
-    Production: "N/A",
-    Website: "N/A",
-    Response: "True",
-  };
+ 
   let moviep=document.querySelector('.movie-page')
   moviep.innerHTML=`
   <div class="mhead">
