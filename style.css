@@ -275,7 +275,7 @@ img{
         display: none;
     }
     .long-box,.box{
-        max-width: 100%;
+        width: 100%;
         min-width: 200px;
     }
     .glist{
