@@ -1,8 +1,12 @@
 let search = document.querySelector(".search input");
 let long = document.querySelector(".long-box");
 let url = "http://www.omdbapi.com/?i=tt3896198&apikey=e8a8b26b";
-
-
+let longb=document.querySelector(".box")
+window.addEventListener('click',(e)=>{
+  if(!long.contains(e.target)){
+    long.classList.add('hide')
+  }
+})
 let fvtdata = [
   {
     Poster:
@@ -116,6 +120,7 @@ window.onload = function () {
 
 // displaying fvt page
 const displayfvt = () => {
+
   let fvt=JSON.parse(localStorage.getItem('fvtdata'))
   
   let gtit = document.querySelector(".gtitle2");
@@ -124,7 +129,7 @@ const displayfvt = () => {
   for(let i=0;i<fvt.length;i++) {
     let movie=fvt[i]
     let div = document.createElement("div");
-    div.innerHTML = `<div class="box">
+    div.innerHTML = `<div class="box" id=${movie.imdbID}>
         <div class="box-left">
             <img src=${movie.Poster}>
         </div>
@@ -136,7 +141,13 @@ const displayfvt = () => {
     </div>
 
         `;
+        div.addEventListener('click',(e)=>{
+          moviePage(`${movie.imdbID}`)
+          window.scrollTo(0, 0);
+
+        })
     gtit.appendChild(div);
+
   };
   let unfvt=document.querySelectorAll('.unfvt')
   unfvt.forEach((ele)=>{
@@ -171,7 +182,7 @@ const displayside = (data, type) => {
 const displayCardComedy = (obj) => {
   const gl = document.querySelector(".comedy");
   let divinner = document.createElement("div");
-  divinner.innerHTML = `<div class="card" style="width: 14rem;">
+  divinner.innerHTML = `<div class="card" id=${obj.imdbID} style="width: 14rem;">
      <img src=${obj.Poster} class="card-img-top" alt="poster">
      <div class="card-body">
        <h5 class="card-title">${obj.Title}</h5>
@@ -179,17 +190,22 @@ const displayCardComedy = (obj) => {
      </div>
    </div>
      `;
+     divinner.addEventListener('click',(e)=>{
+      moviePage(`${obj.imdbID}`)
+      window.scrollTo(0, 0);
 
+    })
   gl.appendChild(divinner);
   let fvt=document.querySelectorAll('.fvt')
   fvt.forEach((ele)=>{
     ele.addEventListener('click',addData)
   })
+  
 };
 const displayCardThriller = (obj) => {
   const gl = document.querySelector(".thriller");
   let divinner = document.createElement("div");
-  divinner.innerHTML = `<div class="card" style="width: 14rem;">
+  divinner.innerHTML = `<div class="card" id=${obj.imdbID} style="width: 14rem;">
          <img src=${obj.Poster} class="card-img-top" alt="poster">
          <div class="card-body">
            <h5 class="card-title">${obj.Title}</h5>
@@ -202,10 +218,17 @@ const displayCardThriller = (obj) => {
          fvt.forEach((ele)=>{
            ele.addEventListener('click',addData)
          })
+         divinner.addEventListener('click',(e)=>{
+          moviePage(`${obj.imdbID}`)
+          window.scrollTo(0, 0);
+
+        })
   gl.appendChild(divinner);
 };
 search.addEventListener("keyup", (e) => {
+  long.classList.remove('hide')
   let t = e.target.value;
+  console.log(e);
   if (t == "") location.reload();
   // console.log(t);
   fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&s=${t}`)
@@ -221,10 +244,13 @@ search.addEventListener("keyup", (e) => {
 });
 
 const display = (movies) => {
-  let list = "";
+  
   for (let i = 0; i < movies.length; i++) {
     let movie = movies[i];
-    let one = `<div class="box">
+    let div=document.createElement('div')
+    div.setAttribute('class','box')
+    div.setAttribute('id',`${movie.imdbID}`)
+    div.innerHTML= `
         <div class="box-left">
             <img src=${movie.Poster}>
         </div>
@@ -233,19 +259,51 @@ const display = (movies) => {
             <div class="year">${movie.Year}</div>
         </div>
         <button class="add-fvt fvt" value=${movie.imdbID}>ADD TO FAVOURITE</button>
-    </div>
-
         `;
-    list += one;
+        div.addEventListener('click',(e)=>{
+          moviePage(`${movie.imdbID}`)
+          long.classList.add('hide')
+          window.scrollTo(0, 0);
+
+        })
+    long.appendChild(div)
   }
-  long.innerHTML = list;
   let fvt=document.querySelectorAll('.fvt')
+
 
   fvt.forEach((ele)=>{
     ele.addEventListener('click',addData)
   })
+  // let boxes=document.querySelectorAll('.box')
+  // boxes.forEach((box)=>{
+  //   box.addEventListener(('click'),(e)=>{
+  //     console.log(e);
+  //   })
+  // })
+  
+//   let addbutton=document.querySelectorAll('.add-fvt')
+
+// addbutton.forEach((ele)=>{
+//   ele.addEventListener('click',(e)=>{
+//     console.log(e.target.parentElement,'...');
+
+//   })
+// })
 };
 
+const moviePage=(e)=>{
+console.log(e,);
+  fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&i=${e}&plot=full`)
+      .then((res) => res.json())
+      .then((data) => {
+        let response = data.Response;
+        if (response) {
+          displayMoviePage(data) 
+        }
+      })
+      .catch((err) => console.log("error agya "));
+
+}
 const displayMoviePage = (movie) => {
   const moviedata = {
     Title: "Batman",
@@ -279,4 +337,35 @@ const displayMoviePage = (movie) => {
     Website: "N/A",
     Response: "True",
   };
+  let moviep=document.querySelector('.movie-page')
+  moviep.innerHTML=`
+  <div class="mhead">
+        <div class="title">${movie.Title}</div>
+        <div class="year">${movie.Year}</div>
+      </div>
+      <div class="mmid flex">
+        <div class="left">
+          <img
+            src=${movie.Poster}
+            alt="poster"
+          />
+        </div>
+        <div class="right">
+          <div class="plot">
+          ${movie.Plot}
+            </div>
+        </div>
+        </div>
+        <div class="mfoot">
+          
+        <div class="rating">IMDB: ${movie.imdbRating}</div>
+        <button class="add-fvt fvt" value=${movie.imdbID}>ADD TO FAVOURITE</button>
+
+    </div>
+
+  `
+  let fvt=document.querySelector('.mfoot .fvt')
+  fvt.addEventListener('click',addData)
+
+  
 };
