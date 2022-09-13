@@ -52,6 +52,7 @@ img{
 }
 .search input{
     border: none;
+    outline:none;
     text-decoration: none;
     height: 100%;
     justify-content: space-around;
