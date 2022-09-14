@@ -73,7 +73,7 @@ const addData=(event)=>{
        }
      }
   if(!copy){
-  fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&i=${event.target.value}`)
+  fetch(`https://www.omdbapi.com/?apikey=e8a8b26b&i=${event.target.value}`)
   .then((res) => res.json())
   .then((data) => {
     let response = data.Response;
@@ -93,7 +93,7 @@ const addData=(event)=>{
 window.onload = function () {
 
   //to fetch comedy
-  fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&s=comedy`)
+  fetch(`https://www.omdbapi.com/?apikey=e8a8b26b&s=comedy`)
     .then((res) => res.json())
     .then((data) => {
       let response = data.Response;
