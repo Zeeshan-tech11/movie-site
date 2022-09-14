@@ -104,7 +104,7 @@ window.onload = function () {
     .catch((err) => console.log("error agya "));
 
   //to fetch thriller
-  fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&s=thriller`)
+  fetch(`https://www.omdbapi.com/?apikey=e8a8b26b&s=thriller`)
     .then((res) => res.json())
     .then((data) => {
       let response = data.Response;
