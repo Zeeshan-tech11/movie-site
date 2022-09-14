@@ -160,7 +160,7 @@ const displayfvt = () => {
 const displayside = (data, type) => {
   
   for (let i = 0; i < 4 && i < data.length; i++) {
-    fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&i=${data[i].imdbID}`)
+    fetch(`https://www.omdbapi.com/?apikey=e8a8b26b&i=${data[i].imdbID}`)
       .then((res) => res.json())
       .then((data) => {
         let response = data.Response;
@@ -234,7 +234,7 @@ search.addEventListener("keyup", (e) => {
   console.log(e);
   if (t == "") location.reload();
   // console.log(t);
-  fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&s=${t}`)
+  fetch(`https://www.omdbapi.com/?apikey=e8a8b26b&s=${t}`)
     .then((res) => res.json())
     .then((data) => {
       let response = data.Response;
@@ -296,7 +296,7 @@ const display = (movies) => {
 
 const moviePage=(e)=>{
 console.log(e,);
-  fetch(`http://www.omdbapi.com/?apikey=e8a8b26b&i=${e}&plot=full`)
+  fetch(`https://www.omdbapi.com/?apikey=e8a8b26b&i=${e}&plot=full`)
       .then((res) => res.json())
       .then((data) => {
         let response = data.Response;
